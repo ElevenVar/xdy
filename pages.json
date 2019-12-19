@@ -1,0 +1,401 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "顶呱呱 - 智能企服平台" 
+			}
+		}
+	    ,{
+            "path" : "pages/classify/index/index",
+            "style" : {
+				"navigationBarTitleText": "商品分类"
+			}
+        }
+        ,{
+            "path" : "pages/activity/index/index",
+            "style" : {
+				"navigationBarTitleText": "活动中心"
+			}
+        }
+		,{
+		    "path" : "pages/shop/index/index",
+		    "style" : {
+				"navigationBarTitleText": "购物车"
+			}
+		}
+        ,{
+            "path" : "pages/my/index/index",
+            "style" : {
+				"navigationBarTitleText": "我的"
+			}
+        }
+        
+        ,{
+            "path" : "pages/selectCity/selectCity",
+            "style" : {
+				"navigationBarTitleText": "城市选择"
+			}
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" : {
+				"navigationBarTitleText": "搜索"
+			}
+        }, {
+            "path" : "pages/login/login",
+            "style" : {
+				"navigationBarTitleText": "登录智能企服平台"
+			}
+        }
+		,{
+		    "path" : "pages/login/wxLogin",
+		    "style" : {
+				"navigationBarTitleText": "绑定手机号"
+			}
+		},
+		{
+		    "path" : "pages/login/moblieLogin",
+		    "style" : {
+				"navigationBarTitleText": "手机验证登录"
+			}
+		}
+        ,{
+            "path" : "pages/login/passwordLogin",
+            "style" : {
+				"navigationBarTitleText": "密码登录"
+			}
+        },
+		{
+		    "path" : "pages/login/forgetPassword",
+		    "style" : {
+				"navigationBarTitleText": "找回密码"
+			}
+		},
+		{
+		    "path" : "pages/login/nextPasswrod",
+		    "style" : {
+				"navigationBarTitleText": "找回密码"
+			}
+		},
+		{
+		    "path" : "pages/login/enroll",
+		    "style" : {
+				"navigationBarTitleText": "注册账号"
+			}
+		},
+		{
+			"path": "pages/productList/productList",
+			"style": {
+				"navigationBarTitleText": "商品列表",
+				"navigationStyle": "custom"	
+			}
+		},
+		{
+			"path": "pages/productList/recommendList",
+			"style": {
+				"navigationBarTitleText": "推荐商品",
+				"navigationStyle": "custom"	
+			}
+		},
+		{
+		    "path" : "pages/productDetails/productDetails",
+		    "style" : {
+				"navigationBarTitleText": "商品详情",
+				"navigationStyle": "custom"	
+			}
+		}
+        ,{
+            "path" : "pages/my/coupon/coupon",
+            "style" : {
+				"navigationBarTitleText": "我的优惠券"
+			}    
+        },
+        {
+            "path" : "pages/message/message",
+            "style" : {
+				"navigationBarTitleText": "消息"
+			}    
+        },
+        {
+            "path" : "pages/messageClassify/messageClassify",
+            "style" : {
+				"navigationBarTitleText": "消息类别"
+			}    
+        }
+        ,{
+            "path" : "pages/order/confirmOrder/confirmOrder",
+            "style" : {
+				"navigationBarTitleText": "确认订单"
+			}
+        },{
+            "path" : "pages/order/submitOrder/submitOrder",
+            "style" : {
+				"navigationBarTitleText": "订单提交成功"
+			}
+        },{
+            "path" : "pages/messageDetail/messageDetail",
+            "style" : {
+				"navigationBarTitleText": "消息详情"
+			}
+        },{
+            "path" : "pages/helpCenter/helpCenter",
+            "style" : {
+				"navigationBarTitleText": "帮助中心"
+			}
+        },{
+            "path" : "pages/helpCenterSon/helpCenterSon",
+            "style" : {
+				"navigationBarTitleText": "帮助中心(2)"
+			}
+        },{
+            "path" : "pages/faq/faq",
+            "style" : {
+				"navigationBarTitleText": "常见问题"
+			}
+        },{
+            "path" : "pages/cashierDesk/payResult/payResult",
+            "style" : {
+				"navigationBarTitleText": "支付结果"
+			}
+        }
+        ,{
+            "path" : "pages/cashierDesk/pay/pay",
+            "style" : {
+				"navigationBarTitleText": "智能企服平台收银台"
+			}
+        },{
+            "path" : "pages/accountSetting/accountSetting",
+            "style" : {
+				"navigationBarTitleText": "账户设置"
+			}
+        },{
+            "path" : "pages/accountSetting/personalDetails/personalDetails",
+            "style" : {
+				"navigationBarTitleText": "个人信息"
+			}
+        },{
+            "path" : "pages/validateWay/validateWay",
+            "style" : {
+				"navigationBarTitleText": "选择验证方式"
+			}
+        },{
+            "path" : "pages/validateWay/validateNote",
+            "style" : {
+				"navigationBarTitleText": "验证绑定手机短信"
+			}
+        },{
+            "path" : "pages/validateWay/validatePayPass",
+            "style" : {
+				"navigationBarTitleText": "验证支付密码"
+			}
+        },{
+            "path" : "pages/validateWay/setResult",
+            "style" : {
+				"navigationBarTitleText": "设置成功"
+			}
+        },{
+            "path" : "pages/validateWay/setNewPas",
+            "style" : {
+				"navigationBarTitleText": "设置新登录密码"
+			}
+        }
+        ,{
+            "path" : "pages/order/order/order",
+            "style" : {
+				"navigationBarTitleText": "我的订单"
+			}
+        } ,{
+            "path" : "pages/order/orderDetails/orderDetails",
+            "style" : {
+				"navigationBarTitleText": "订单详情"
+			}
+        } ,{
+            "path" : "pages/project/projectList",
+            "style" : {
+				"navigationBarTitleText": "",
+                "navigationStyle": "custom"
+			}
+        } ,{
+            "path" : "pages/project/projectDetails",
+            "style" : {
+				"navigationBarTitleText": "解决方案"
+			}
+        } ,{
+            "path" : "pages/project/specialistDetail",
+            "style" : {
+				"navigationBarTitleText": "专家主页",
+                "navigationStyle": "custom"
+			}
+        } ,{
+            "path" : "pages/project/makeSpecialist",
+            "style" : {
+				"navigationBarTitleText": "预约专家"
+			}
+        }
+        ,{
+            "path" : "pages/knowCenter/list/list",
+            "style" : {
+				"navigationBarTitleText": "知识中心",
+				"navigationStyle":"custom",
+				"navigationBarTextStyle": "white"
+			}
+        }
+        ,{
+            "path" : "pages/knowCenter/detail/detail",
+            "style" : {
+				"navigationBarTitleText": "知识中心详情"
+			}
+        }
+        ,{
+            "path" : "pages/my/like/like",
+            "style" : {
+				"navigationBarTitleText":"我关注的商品"
+			}
+        },{
+            "path" : "pages/messageCenter/messageCenter",
+            "style" : {
+				"navigationBarTitleText":"资料中心"
+			}
+        },{
+            "path" : "pages/my/coupon/couponDetils",
+            "style" : {
+				"navigationBarTitleText":"优惠券详情"
+			}
+        },{
+            "path" : "pages/my/coupon/useCoupon",
+            "style" : {
+				"navigationBarTitleText":"优惠券凑单"
+			}
+        }
+        ,{
+            "path" : "pages/my/gift/gift",
+            "style" : {
+				"navigationBarTitleText":"我的礼品券"
+			}
+        }
+        ,{
+            "path" : "pages/order/complaints/complaints",
+            "style" : {
+				"navigationBarTitleText":"投诉"
+			}
+        }
+        ,{
+            "path" : "pages/order/orderSingleBack/orderSingleBack",
+            "style" : {
+				"navigationBarTitleText":"我要退单"
+			}
+        }
+        ,{
+            "path" : "pages/order/evaluation/evaluation",
+            "style" : {
+				"navigationBarTitleText":"评价"
+			}
+        }
+        ,{
+            "path" : "pages/accountSetting/address/addAddress/addAddress",
+            "style" : {
+				"navigationBarTitleText":"添加地址"
+			}
+        }
+        ,{
+            "path" : "pages/accountSetting/address/mineAddress/mineAddress",
+            "style" : {
+            	"navigationBarTitleText":"我的地址"
+            }
+        }
+        ,{
+            "path" : "pages/accountSetting/accountBind/accountBind",
+            "style" : {
+				"navigationBarTitleText":"账号绑定"
+			}
+        }
+        ,{
+            "path" : "pages/accountSetting/about/about",
+            "style" : {
+				"navigationBarTitleText":"关于智能服务平台"
+			}
+        },{
+            "path" : "pages/company/company",
+            "style" : {
+				"navigationBarTitleText":"我的企业"
+			}
+        },{
+            "path" : "pages/company/companyAdd",
+            "style" : {
+				"navigationBarTitleText":"添加企业"
+			}
+        }
+        ,{
+            "path" : "pages/order/orderPayList/orderPayList",
+            "style" : {
+				"navigationBarTitleText":"订单支付"
+			}
+        }
+        ,{
+            "path" : "pages/product/paySuccess/paySuccess",
+            "style" : {
+				"navigationBarTitleText":"支付成功"
+			}
+        }
+        ,{
+            "path" : "pages/order/applyContract/applyContract",
+            "style" : {
+				"navigationBarTitleText":"申请合同"
+			}
+        }
+        ,{
+            "path" : "pages/order/findContract/findContract",
+            "style" : {
+				"navigationBarTitleText":"查看合同"
+			}
+        }
+        ,{
+            "path" : "pages/webView/webView",
+            "style" : {}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "智能企服平台",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	        "color": "#878787",
+	        "selectedColor": "#10BBB8",
+	        "borderStyle": "black",
+	        "backgroundColor": "#ffffff",
+	        "list": [{
+	            "pagePath": "pages/index/index",
+	            "iconPath": "static/image/tabbar/home.png",
+	            "selectedIconPath": "static/image/tabbar/home-hover.png",
+	            "text": "首页"
+	        }, {
+	            "pagePath": "pages/classify/index/index",
+	            "iconPath": "static/image/tabbar/classification.png",
+	            "selectedIconPath": "static/image/tabbar/classification-hover.png",
+	            "text": "分类"
+	        },{
+	            "pagePath": "pages/shop/index/index",
+	            "iconPath": "static/image/tabbar/cart.png",
+	            "selectedIconPath": "static/image/tabbar/cart-hover.png",
+	            "text": "购物车"
+	        },{
+	            "pagePath": "pages/my/index/index",
+	            "iconPath": "static/image/tabbar/my.png",
+	            "selectedIconPath": "static/image/tabbar/my-hover.png",
+	            "text": "我的"
+	        }]
+	    },
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "确认订单", //模式名称
+				"path": "pages/order/confirmOrder/confirmOrder", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

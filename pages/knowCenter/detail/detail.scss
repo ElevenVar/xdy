@@ -1,0 +1,45 @@
+.know-detail-wrap{
+.know-detail{
+	overflow: auto;
+	padding: 40rpx 32rpx;
+	box-sizing: border-box;
+	background: #fff;
+	.know-detail-title{
+		display: block;
+		font-size:36rpx;
+		font-family:PingFangSC;
+		font-weight:600;
+		color:rgba(49,49,49,1);
+		line-height:52rpx;
+	}
+	.know-detail-time{
+		display: block;
+		font-size:24rpx;
+		font-family:PingFangSC;
+		font-weight:400;
+		color:rgba(160,163,168,1);
+		line-height:34rpx;
+		margin: 15rpx 0 30rpx 0;
+	}
+	.know-detail-banner{
+		display: block;
+		margin: 0 auto;
+		background:rgba(216,216,216,1);
+		border-radius:8rpx;
+        width:686rpx;
+        overflow: hidden;
+	}
+	.know-detail-content{}
+}
+	.detail-footer{
+		width: 100%;
+		height: 140rpx;
+		line-height: 140rpx;
+		background:rgba(245,245,245,1);
+		text-align: center;
+		font-size:28rpx;
+		font-family:PingFangSC;
+		font-weight:400;
+		color:rgba(160,163,168,1);
+	}
+}

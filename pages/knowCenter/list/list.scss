@@ -1,0 +1,129 @@
+ ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        color: transparent;
+    }
+.know-list-wrap {
+	// background:rgba(245,245,245,1);
+
+	.banner-wrap {
+		width: 100%;
+		height: 500rpx;
+		background:rgba(0,0,0,1);
+		overflow: hidden;
+		position: relative;
+		image {
+			width: 100%;
+			height: 372rpx;
+			margin-top: 128rpx;
+		}
+		
+	}
+    // tab切换
+    .tab-wrap{
+    	width: 100%;
+    	height:96rpx;
+    	background:rgba(255,255,255,0.2);
+    	left: 0;
+    	font-size:28rpx;
+    	font-family:PingFangSC;
+    	font-weight:400;
+    	color:rgba(255,255,255,1);
+    	line-height:96rpx;
+    	transition: all .3s;
+        position: sticky;
+        z-index: 10;
+        overflow:hidden;
+		position: absolute;
+        white-space:nowrap;
+		bottom: 0;
+    	.tab-item{
+            display: inline-block;
+            padding: 0 24rpx;
+            text{
+              position: relative;  
+            }
+    		text.active{
+    			color:rgba(255,102,0,1);
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width:100%;
+                    height:4rpx;
+                    background:rgba(255,102,0,1);
+                    bottom: -29rpx;
+                    left: 0;
+                }
+    		}
+    	}
+    	.border-line{
+    		display: block;
+    		width:118rpx;
+    		height:4rpx;
+    		position: absolute;
+    		background:rgba(255,102,0,1);
+    		bottom: 0;
+    		transition: all .3s;
+    	}
+    }
+	// 列表页面
+	.list-wrap{
+		display: flex;
+		flex-direction: column;
+		.list-item{
+			width:100%;
+			background:rgba(255,255,255,1);
+			padding: 28rpx 32rpx 40rpx 32rpx;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			margin-top: 20rpx;
+			.list-item-title{
+				font-size:32rpx;
+				font-family:PingFangSC;
+				font-weight:600;
+				color:rgba(49,49,49,1);
+				line-height: 45rpx;
+				max-height: 90rpx;
+			}
+			.list-item-info{
+				display: flex;
+				margin-top: 20rpx;
+				justify-content: space-between;
+				.list-item-left{
+					width: 460rpx;
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					.list-item-dsec{
+						width: 100%;
+						height: 80rpx;
+						font-size:28rpx;
+						font-family:PingFangSC;
+						font-weight:400;
+						color:rgba(112,113,117,1);
+						line-height:40rpx;
+					}
+					.list-item-time{
+						font-size:28rpx;
+						font-family:PingFangSC;
+						font-weight:400;
+						color:rgba(160,163,168,1);
+						line-height:42rpx;
+					}
+				}
+				.list-item-img{
+					width: 192rpx;
+					height: 128rpx;
+				}
+			}
+		}
+	}
+	.no-data{
+		text-align: center;
+		margin-top: 20rpx;
+		font-size: 28rpx;
+		color: #999;
+	}
+}
