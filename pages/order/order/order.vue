@@ -22,9 +22,7 @@
 				<view class="content" v-if="!orderModel.isPackage">
 					<view class="productList" v-for="(productModel, id) in orderModel.shopArr" :key="id">
 						<view class="title">{{ productModel.productName }}</view>
-						<view class="subtitle" v-for="(item, index) in productModel.shopJsonArr" :key='index'>
-							{{ item.attrValue }}: {{ item.attrDetailsName }}
-						</view>
+						<view class="subtitle" v-for="(item, index) in productModel.shopJsonArr" :key="index">{{ item.attrValue }}: {{ item.attrDetailsName }}</view>
 						<!-- 服务标签 -->
 						<view class="serviceLabelBg">
 							<view class="service-grid" v-for="(serviceModel, id) in productModel.additionItemJsonArr" :key="id">
@@ -66,11 +64,16 @@
 					<view class="operationButton cancelButton" @click.stop="cancelButtonAction(orderModel)">取消订单</view>
 					<view class="operationButton payButtonNow" @click.stop="payButtonAction(orderModel)">立即支付</view>
 				</view>
-				 <!-- v-if="orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_WAIT_HANDLE' && orderModel.orderSource != 'ORDER-SOURCE-IBOSS-IMPORT'" -->
-				<view class="orderOperationButtonBg"
-				 v-if="orderModel.orderStatusCode=='CLOUD_ORDER_STATUS_HANDLING' || orderModel.orderStatusCode=='CLOUD_ORDER_STATUS_REFUND_REJECT'
-				 || orderModel.orderStatusCode=='CLOUD_ORDER_STATUS_WAIT_HANDLE' || orderModel.orderStatusCode=='CLOUD_ORDER_STATUS_CHARGE_BACK_REJECT'"
-				 >
+				<!-- v-if="orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_WAIT_HANDLE' && orderModel.orderSource != 'ORDER-SOURCE-IBOSS-IMPORT'" -->
+				<view
+					class="orderOperationButtonBg"
+					v-if="
+						orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_HANDLING' ||
+							orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_REFUND_REJECT' ||
+							orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_WAIT_HANDLE' ||
+							orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_CHARGE_BACK_REJECT'
+					"
+				>
 					<view class="operationButton applyContract" v-if="!orderModel.contractNo" @click.stop="applyContract(orderModel)">申请合同</view>
 					<view class="operationButton payButtonNow" v-else @click.stop="lookContractAction(orderModel)">查看合同</view>
 				</view>
@@ -108,7 +111,6 @@
 				<!-- <view class='orderOperationButtonBg' wx:if="{{orderModel.orderStatusCode == 'CLOUD_ORDER_STATUS_WAIT_HANDLE'}}">
         <view class='operationButton renewButton' data-order='{{orderModel}}' catchtap='renewButtonAction'>立即续费</view>
       </view> -->
-	  
 			</view>
 			<view v-if="isLoading && orderList.length == 0" class="Placeholder">
 				<!-- <image :src="imageBaseURL + 'package_icon_no_search_res.png'"></image> -->
@@ -169,7 +171,16 @@ export default {
 			limit: 10,
 			isNoMoreData: false,
 			isLoading: false,
-			filters: filters
+			filters: filters,
+			params: {
+				orderIds: '',
+				app: 'WECHAT',
+				orderPayMethod: 'GUAGUA_ORDER_PAY_METHOD_GUAGUA',
+				payType: 'ORF_PAY_WECHAT',
+				openId: wx.getStorageSync('openId'),
+				sourceType: 'SOURCE_XDY'
+			},
+			payParams: {}
 		};
 	},
 
@@ -179,9 +190,9 @@ export default {
 		this.initOrderData();
 	},
 	onShow() {
-		if(uni.getStorageSync('orderChange')) {
+		if (uni.getStorageSync('orderChange')) {
 			this.initOrderData();
-			uni.removeStorageSync('orderChange')
+			uni.removeStorageSync('orderChange');
 		}
 	},
 	components: {},
@@ -206,7 +217,6 @@ export default {
 			// 	});
 			// 	}
 			// })
-			
 		},
 		// 初始化获取数据
 		initOrderData() {
@@ -226,14 +236,14 @@ export default {
 			this.checkCor();
 		},
 		prices(str) {
-		  if (str % 100 == 0) {
-			  return String(str / 100) + '.00'
-		  } else if (str % 10 == 0) {
-			  return String(str / 100) + '0'
-		  } else {
-			  let num = String((str / 100).toFixed(3))
-			  return num.substr(0, num.length - 1)
-		  }
+			if (str % 100 == 0) {
+				return String(str / 100) + '.00';
+			} else if (str % 10 == 0) {
+				return String(str / 100) + '0';
+			} else {
+				let num = String((str / 100).toFixed(3));
+				return num.substr(0, num.length - 1);
+			}
 		},
 		swichNav(index) {
 			// 点击标题切换当前页时改变样式
@@ -344,28 +354,24 @@ export default {
 		 * 支付按钮事件
 		 */
 		payButtonAction(orderModel) {
-			console.log(orderModel);
 			uni.showLoading({
 				title: '加载中..',
 				mask: true
 			});
+			this.params.orderIds = orderModel.orderId;
 			// 立即支付
 			// 呱呱支付:GUAGUA_ORDER_PAY_METHOD_GUAGUA 线下支付:GUAGUA_ORDER_PAY_METHOD_OFFLINE,模拟支付： GUAGUA_ORDER_PAY_METHOD_OFFLINE
-			let orderPayMethod = 'GUAGUA_ORDER_PAY_METHOD_GUAGUA';
-			this.$http.post(order.orderToPayActionURL, { orderIds: orderModel.orderId, app: 'WECHAT', orderPayMethod }).then(res => {
+			this.$http.post(order.orderToPayActionURL, this.params).then(res => {
 				uni.hideLoading();
 				if (res.code == 200) {
-					if(orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_OFFLINE') {
+					if (this.params.orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_OFFLINE') {
 						uni.showToast({ title: '支付成功' });
 						setTimeout(() => {
 							this.initOrderData();
-						}, 1500)
-					} else if(orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_GUAGUA') {
-						uni.setStorageSync('orderInfo', JSON.stringify({ orderIds: orderModel.orderId, actualPrice: this.prices(orderModel.actualPrice) }))
-						this.$store.commit('SET_PAYURL', res.data);
-						uni.navigateTo({
-							url: `/pages/order/orderPayList/orderPayList`
-						});
+						}, 1500);
+					} else if (this.params.orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_GUAGUA') {
+						this.payParams = res.data;
+						this.requestWXPayWithParams(this.payParams, orderModel.actualPrice);
 					}
 				} else {
 					uni.showToast({
@@ -373,9 +379,39 @@ export default {
 						icon: 'none'
 					});
 				}
-			})
+			});
 		},
 
+		requestWXPayWithParams(options, actualPrice) {
+			console.log(options);
+			//代表已经发起了一次支付
+			//this.data.isPayAction = true;
+			let that = this;
+			uni.getProvider({
+				service: 'payment',
+				success(res) {
+					uni.requestPayment({
+						provider: res.provider[0],
+						timeStamp: options.timeStamp,
+						package: options.package,
+						signType: options.signType,
+						nonceStr: options.nonceStr,
+						paySign: options.paySign,
+						success: result => {
+							setTimeout(() => {
+								uni.redirectTo({
+									url: `/pages/product/paySuccess/paySuccess?isSuccess=true&actualPrice=${actualPrice}`
+								});
+							}, 1500);
+						},
+						fail: result => {
+							
+						},
+						complete: result => {}
+					});
+				}
+			});
+		},
 		/**
 		 * 取消订单按钮事件
 		 */
@@ -393,7 +429,7 @@ export default {
 								uni.showToast({ title: '取消成功', icon: 'success' });
 								setTimeout(() => {
 									that.initOrderData();
-								}, 1500)
+								}, 1500);
 							} else {
 								uni.showToast({ title: res.message, icon: 'icon' });
 							}
@@ -427,10 +463,10 @@ export default {
 			// });
 		},
 		// 申请合同
-		applyContract(orderModel){
+		applyContract(orderModel) {
 			uni.navigateTo({
 				url: `/pages/order/applyContract/applyContract?orderId=${orderModel.orderId}`
-			})
+			});
 		},
 		/**
 		 * 退单-查看进度
@@ -507,10 +543,10 @@ export default {
 /* pages/tabbar/pages/orderList/orderList.css */
 /* 选项卡顶部 */
 ::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-		color: transparent;
-	}
+	width: 0;
+	height: 0;
+	color: transparent;
+}
 .tab-view {
 	width: 100%;
 	height: 96rpx;
@@ -755,9 +791,9 @@ export default {
 	margin: 30rpx 26rpx 30rpx 16rpx;
 }
 
-.orderOperationButtonBg .applyContract{
-	color: #10BBB8;
-	border-color: #10BBB8;
+.orderOperationButtonBg .applyContract {
+	color: #10bbb8;
+	border-color: #10bbb8;
 	margin: 30rpx 26rpx 30rpx 16rpx;
 }
 .orderOperationButtonBg .evaluationButton {

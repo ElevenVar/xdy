@@ -478,6 +478,7 @@
             };
         },
         onLoad: function(options) {
+			console.log(options)
             let obj = {};
             // #ifdef MP-WEIXIN
             obj = wx.getMenuButtonBoundingClientRect();

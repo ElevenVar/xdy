@@ -210,10 +210,18 @@
 								}
 							}
 						});
+						uni.setStorageSync("openId",res.data.userInfo.openId);
 						// 返回
-						uni.navigateBack({
-						    delta: 2
-						});
+						if(this.$store.state.xdyParams.xdyUrl){
+							this.$store.commit('SET_WEB_VIEW_URL', `${this.$store.state.xdyParams.xdyUrl}?token=${res.data.token}&platform=xdy&memberId=${res.data.userInfo.id}`);
+							uni.navigateTo({
+								url: '/pages/webView/webView'
+							});
+						} else {
+							uni.navigateBack({
+							    delta: 2
+							});
+						}
 					} else{
 						uni.showToast({
 						    title: res.message,

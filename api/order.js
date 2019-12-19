@@ -9,7 +9,8 @@ export default {
 	getCloudOrderTotalMoneyURL: `${api.cloud_order}/api/order/v1/countPrice.do`, //实时计算订单总金额
 	//shoppingCardSearchPriceURL: `${api.cloud_order}/api/order/v1/countPrice2.do`,//购物车查询价格
 	getCloudOrderCountURL: `${api.cloud_order}/api/order/v1/countOrderByStatus.do`, //查询订单数量接口
-	orderToPayActionURL: `${api.cloud_order}/api/order/pay/v1/toPay.do`, //订单去支付
+	// orderToPayActionURL: `${api.cloud_order}/api/order/pay/v1/toPay.do`, //订单去支付
+	  orderToPayActionURL: `${api.cloud_order}/api/order/pay/v1/toSubmitPay.do`, //订单去支付
 	shoppingOrderCancelURL: `${api.cloud_order}/api/order/v1/cancelOrder.do`, //取消订单
 	getOrderBaseInfoURL: `${api.cloud_order}/api/order/v1/getOrderBaseInfo.do`, //获取订单基础信息
 	orderRefundURL: `${api.cloud_order}/api/order/refundOrder.do`, //退单、退款接口

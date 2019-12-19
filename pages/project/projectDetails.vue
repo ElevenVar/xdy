@@ -2,7 +2,7 @@
     <view class="">
         <view class="solutionListPage">
             <view class="headerBg">
-                <image mode="scaleToFill" src="https://fastdfs.dgg.net/group9/M00/2F/72/CgIBv11UwUmEfeg8AAAAADgGlek66.jpeg"></image>
+                <image mode="scaleToFill" :src="details.mini_program_details_image_url"></image>
                 <view class="headerInfo">
                     <view class="title ellipsis"><text>{{details.solution_name}}</text></view>
                     <view class="content two-line" style="-webkit-line-clamp: 5"><text>{{details.silution_description}}</text></view>

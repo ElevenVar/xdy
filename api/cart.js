@@ -7,4 +7,5 @@ export default {
 	updateCartAttr: `${api.cloud_product}/api/shopCart/v1/update_shop_cart_sku.do`, // 修改产品/套餐属性
 	deleteCart: `${api.cloud_product}/api/shopCart/v1/del_cart_sku.do`, // 删除购物车商品
 	update_sku_number: `${api.cloud_product}/api/shopCart/v1/update_sku_number.do`, //购物车加减数量
+	settle_commodity_data:`${api.cloud_product}/api/shopCart/v1/settle_commodity_data.do` // 计算结算页面金额
 }

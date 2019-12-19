@@ -4,7 +4,7 @@
             <!-- <image :src="item.comDefaultSkuImg ? item.comDefaultSkuImg : altImg"></image> --></view>
 		<view class="title">{{ item.comName }}</view>
 		<view class="tag">
-			<view class="tag-item" v-for="(items, index) in ['满减', '优惠券']" :key="index">{{ items }}</view>
+			<view class="tag-item" v-if="item.commodityPromotionLabel.compLabelName">{{ item.commodityPromotionLabel.compLabelName }}</view>
 		</view>
 		<view class="price">
 			<view class="ellipsis" v-if='item.comSkuIsDiscuss == 0'>
@@ -104,6 +104,7 @@ export default {
 	}
 	.tag {
 		margin-top: 16rpx;
+        height: 40rpx;
 		.tag-item {
 			display: inline-block;
 			margin-right: 8rpx;

@@ -288,12 +288,15 @@
                         let nuavailableList = [],
                             availableList = [];
                         res.data.map(item => {
+							console.log(this.waitPayMoney)
                             if (item.coupon.plat.indexOf('COUPON_PLAT_1') == -1) {
                                 item.dsec = '只限pc端使用'
                                 nuavailableList.push(item);
+                            } else if (item.item.outTime) {
+                                item.dsec = '当前时间不可用'
+                                nuavailableList.push(item)
                             } else if (item.coupon.type == 'COUPON_TYPE_DJ' && item.coupon.denomination *
-                                1 != 0 ? this.settleData.waitPayMoney * 1 < item.coupon.denomination /
-                                100 : '') {
+                                1 != 0 ? this.waitPayMoney * 1 < item.coupon.denomination: '') {
                                 item.dsec = '金额不满' + item.coupon.denomination / 100
                                 nuavailableList.push(item);
                                 // } else if (new Date(replaceStr(item.item.sTime)).getTime() > nowTime) {
@@ -302,9 +305,6 @@
                                 // } else if(new Date(replaceStr(item.item.eTime)).getTime() < nowTime){
                                 // 	item.dsec = '已过期'
                                 // 	nuavailableList.push(item);
-                            } else if (item.outTime) {
-                                item.dsec = '已过期'
-                                nuavailableList.push(item)
                             } else if (item.item.status == 1) {
                                 item.dsec = '已使用'
                                 nuavailableList.push(item);
@@ -348,25 +348,50 @@
                 });
             },
             // 选择使用的优惠卷
-            handleDetail(item, index) {
-                if (this.popupActiveIndex != index + 1) {
+            // 选择使用的优惠卷
+            		handleDetail(item, index) {
+            			if (this.popupActiveIndex != index + 1) {
                     this.params.couponNo = item.item.no;
                     if (item.coupon.type == 'COUPON_TYPE_DJ') {
                         this.popupActivePrice = '￥ ' + item.coupon.amount / 100;
-                        if (this.waitPayMoney * 1 - item.coupon.amount >= 0) {
                             this.popupActiveIndex = index + 1;
                             this.settleData.yhMoney = item.coupon.amount;
-                        } else {
-                            uni.showToast({
-                                title: '优惠金额不得大于支付金额',
-                                icon: 'none'
-                            });
-                        }
                     } else {
+                      console.log(item, item.coupon.productType, '1111111111')
+                      if(item.coupon.productType == 0) {
                         this.popupActiveIndex = index + 1;
                         this.popupActivePrice = item.coupon.amount / 10 + '折';
                         this.settleData.yhMoney = this.prices((this.waitPayMoney * (100 - item.coupon.amount)));
-                        console.log(this.settleData.yhMoney)
+                      } else if(item.coupon.productType == 1) {
+                        let skuSellingPrice = 0
+                        outer:for(let i = 0; i < this.shopCartList.length; i ++) {
+                          outside:for(let j = 0; j < item.coupon.types.length; j ++) {
+                            if(item.coupon.types[j].level1 == this.shopCartList[i].comCateIdTwo){
+                              console.log(this.shopCartList[i])
+                              skuSellingPrice += Number(this.shopCartList[i].skuSellingPrice*this.shopCartList[i].shopSkuNumber)
+                              break outside
+                            }
+                          }
+                        }
+                        this.popupActiveIndex = index + 1;
+                        this.popupActivePrice = item.coupon.amount / 10 + '折';
+                        this.settleData.yhMoney = this.prices((skuSellingPrice * (100 - item.coupon.amount)));
+                      } else if(item.coupon.productType == 2) {
+                        let skuSellingPrice = 0
+                        outer:for(let i = 0; i < this.shopCartList.length; i ++) {
+                          outside:for(let j = 0; j < item.coupon.types.length; j ++) {
+                            if(item.coupon.types[j].no == this.shopCartList[i].comCode){
+                              skuSellingPrice += this.shopCartList[i].skuSellingPrice*this.shopCartList[i].shopSkuNumber
+                              // break outer;
+                              // break outside;
+                            }
+                          }
+                        }
+                        console.log(skuSellingPrice)
+                        this.popupActiveIndex = index + 1;
+                        this.popupActivePrice = item.coupon.amount / 10 + '折';
+                        this.settleData.yhMoney = this.prices((skuSellingPrice * (100 - item.coupon.amount)));
+                      }
                     }
                 } else {
                     this.popupActiveIndex = '';

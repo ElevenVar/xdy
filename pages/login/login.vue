@@ -72,8 +72,9 @@
 				imgUrl : imgUrl,
 			}
 		},
-		onShow(){
-			
+		onLoad(options){
+			console.log(options)
+			this.$store.commit('SET_XDY_PARAMS', options)
 		},
 		methods: {
 			getUserinfo(res){
@@ -83,6 +84,7 @@
 					let iv = res.detail.iv;
 					this.$store.commit('SET_USERINFO', res.detail.userInfo);
 					let _this = this;
+                    
 					// 小程序登录
 					uni.login({
 					  success(resLogin) {
@@ -124,9 +126,16 @@
 							}
 						});
 						// 返回
-						uni.navigateBack({
-						    delta: 1
-						});
+						if(this.$store.state.xdyParams.xdyUrl){
+							this.$store.commit('SET_WEB_VIEW_URL', `${this.$store.state.xdyParams.xdyUrl}?token=${res.data.token}&platform=xdy&memberId=${res.data.userInfo.id}`);
+							uni.navigateTo({
+								url: '/pages/webView/webView'
+							});
+						} else {
+							uni.navigateBack({
+							    delta: 1
+							});
+						}
 					}else if(res.code == 506){
 						uni.navigateTo({
 							url:'/pages/login/wxLogin'

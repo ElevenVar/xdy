@@ -43,6 +43,7 @@ export const user = {
 export const pageIndex = {
 	hotProduct: `${api.cloud_product}/api/commodity/v1/home_page_commodity.do`, // 首页热门产品 get
     homeProduct: `${api.content_cms}/api/home/home_page_list_xcx.do`, // 首页广告位、首页资讯列表、首页解决方案
+	commodityRm: `${api.cloud_product}/api/commodity/v1/commodity_rm.do`, //【公共】热门(推荐)商品列表
 }
 
 // 我的优惠券

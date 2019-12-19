@@ -26,13 +26,24 @@
 				imgUrl: this.$config.imgUrl,
 				orderIds: [],
 				actualPrice: '0.00',
-				orderNo: ''
+				orderNo: '',
+				params: {
+				  orderIds: '',
+				  app: 'WECHAT',
+				  orderPayMethod: 'GUAGUA_ORDER_PAY_METHOD_GUAGUA',
+				  payType: 'ORF_PAY_WECHAT',
+				  openId: wx.getStorageSync('openId'),
+				  sourceType: 'SOURCE_XDY'
+				},
+				payParams: {}
 			};
 		},
 		onLoad(options) {
 			console.log(options, '222')
 			this.orderIds = JSON.parse(options.orderIds)
+			this.params.orderIds = JSON.parse(options.orderIds).join(',')
 			this.actualPrice = options.actualPrice
+			this.params.orderIds =  this.orderIds.join(',')
 			this.getOrderNo()
 		},
 		methods:{
@@ -54,29 +65,76 @@
 				});
 				// 立即支付
 			// 呱呱支付:GUAGUA_ORDER_PAY_METHOD_GUAGUA 线下支付:GUAGUA_ORDER_PAY_METHOD_OFFLINE,模拟支付： GUAGUA_ORDER_PAY_METHOD_OFFLINE
-			let orderPayMethod = 'GUAGUA_ORDER_PAY_METHOD_GUAGUA';
-				this.$http.post(order.orderToPayActionURL, { orderIds: this.orderIds, app: 'WECHAT', orderPayMethod }).then(res => {
+				this.$http.post(order.orderToPayActionURL, this.params).then(res => {
 					uni.hideLoading();
 					if (res.code == 200) {
-						if(orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_OFFLINE') {
+						if(this.params.orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_OFFLINE') {
 							uni.showToast({ title: '支付成功' });
 							setTimeout(() => {
 								uni.navigateTo({
 									url: '/pages/order/order/order'
 								})
 							}, 1000)
-						} else if(orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_GUAGUA') {
-							console.log({ orderIds: this.orderIds, actualPrice: this.actualPrice })
-							this.$store.commit('SET_PAYURL', res.data);
-							uni.setStorageSync('orderInfo', JSON.stringify({ orderIds: this.orderIds, actualPrice: this.actualPrice }))
-							uni.navigateTo({
-								url: `/pages/order/orderPayList/orderPayList`
-							});
+						} else if(this.params.orderPayMethod == 'GUAGUA_ORDER_PAY_METHOD_GUAGUA') {
+							this.payParams = res.data
+							this.requestWXPayWithParams(this.payParams)
 						}
 					} else {
 						uni.showToast({
 							title: res.message,
 							icon: 'none'
+						});
+					}
+				})
+			},
+			requestWXPayWithParams(options) {
+				console.log(options);
+				//代表已经发起了一次支付
+				//this.data.isPayAction = true;
+				let that = this;
+				uni.getProvider({
+					 service: 'payment',
+					success(res) {
+						uni.requestPayment({
+							provider: res.provider[0],
+							timeStamp: options.timeStamp,
+							package: options.package,
+							signType: options.signType,
+							nonceStr: options.nonceStr,
+							paySign: options.paySign,
+							success: result => {
+								setTimeout(() => {
+									uni.redirectTo({
+										url: `/pages/product/paySuccess/paySuccess?isSuccess=true&actualPrice=${that.actualPrice}`
+									});
+								}, 1500);
+							},
+							fail: result => {
+								// 支付失败的时候
+								//返回上一页面
+								if(result.errMsg == 'requestPayment:fail cancel'){
+									uni.showModal({
+										title: '提示',
+										content: '你还未支付',
+										cancelText: '狠心离开',
+										confirmText: '立即支付',
+										success(res) {
+											if (res.confirm) {
+												that.requestWXPayWithParams(that.payParams)
+											} else {
+												uni.redirectTo({
+													url: '/pages/order/order/order'
+												});
+											}
+										}
+									});
+								} else {
+									uni.redirectTo({
+										url: `/pages/product/paySuccess/paySuccess?isSuccess=`
+									});
+								}
+							},
+							complete: result => {}
 						});
 					}
 				})

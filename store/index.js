@@ -10,12 +10,13 @@ export default new Vuex.Store({
         serverTel: '4000-962540', // 服务电话
         // 城市选择数据
         cityData: {
-            cityName: '成都',
+            cityName: '',
             code: 'COMPANY_CD'
         },
         // 默认图片地址
         altImg: 'https://dgg-xiaodingyun.oss-cn-beijing.aliyuncs.com/xdy-xcx/index/ailImg.png',
-		webViewUrl: ''
+		webViewUrl: '',
+		xdyParams: {}
     },
     mutations: {
         'SETCITY'(state,val){
@@ -23,6 +24,9 @@ export default new Vuex.Store({
 		},
 		SET_WEB_VIEW_URL(state,val){
 			state.webViewUrl = val
+		},
+		SET_XDY_PARAMS(state,val){
+			state.xdyParams = val
 		},
     },
     actions: {

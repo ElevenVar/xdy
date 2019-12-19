@@ -1,12 +1,12 @@
 export default {
 	// 正式环境
-	baseURL: "https://cloudgateway.dgg188.cn/", // 顶呱呱api接口
-	cmsURL: 'https://ibosscms.dgg188.cn/', // IBOSS-cms接口
-	baseIbossURL: 'https://ibossvis.dgg188.cn/', // IBOSS-仿客接口
-	mchMerchantSgin: 'A604FF1CEEFE030F4D6CB1D452CA8B56',
-	mchCoding: '20190620000111',
-	messageUrl :' https://ibossuc.dgg188.cn/', // IBOSS-消息接口1',
-	
+	// baseURL: "https://cloudgateway.dgg188.cn/", // 顶呱呱api接口
+	// cmsURL: 'https://ibosscms.dgg188.cn/', // IBOSS-cms接口
+	// baseIbossURL: 'https://ibossvis.dgg188.cn/', // IBOSS-仿客接口
+	// mchMerchantSgin: 'A604FF1CEEFE030F4D6CB1D452CA8B56',
+	// mchCoding: '20190620000111',
+	// messageUrl :' https://ibossuc.dgg188.cn/', // IBOSS-消息接口1',
+
 	// s 环境
 	// baseURL: "https://scloudgateway.dgg.net/", // 顶呱呱api接口
 	// cmsURL: 'https://sibosscms.dgg.net/', // IBOSS-cms接口
@@ -24,12 +24,12 @@ export default {
 	// messageUrl :' https://dibossuc.dgg188.cn/', // IBOSS-消息接口
 	
 	// t 环境
-	// baseURL: "https://tcloudgateway.dgg188.cn/", // 顶呱呱api接口
-	// cmsURL: 'https://tibosscms.dgg188.cn/', // IBOSS-cms接口
-	// baseIbossURL: 'https://tibossvis.dgg188.cn/', // IBOSS-仿客接口
-	// mchMerchantSgin: '28C635AD7B1FC6B3842897DDD81BDAE5',
-	// mchCoding: '20190603000111',
-	// messageUrl :'https://tibossuc.dgg188.cn/', // IBOSS-消息接口
+	baseURL: "https://tcloudgateway.dgg188.cn/", // 顶呱呱api接口
+	cmsURL: 'https://tibosscms.dgg188.cn/', // IBOSS-cms接口
+	baseIbossURL: 'https://tibossvis.dgg188.cn/', // IBOSS-仿客接口
+	mchMerchantSgin: '62070A76D7BF904888B75450D2D6B4C4',
+	mchCoding: '20190620000111',
+	messageUrl :'https://tibossuc.dgg188.cn/', // IBOSS-消息接口
 	
 	// p 环境
 	// baseURL: "https://pcloudgateway.dgg.net/", // 顶呱呱api接口

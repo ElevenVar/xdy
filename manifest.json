@@ -67,7 +67,11 @@
             "checkSiteMap" : false
         },
         "usingComponents" : true,
-        "permission" : {}
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "您的位置将用于定位服务城市"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

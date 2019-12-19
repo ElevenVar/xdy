@@ -26,7 +26,7 @@
 				<view class="tip-text tip-text-error">订单支付失败！</view>
 				<view class="system-text">您的订单未能成功支付，如有疑问请致电客服人员！</view>
 				<view class="pay-info">
-					<view class="pay-way">支付方式：<text class="tip">呱呱支付</text></view>
+					<view class="pay-way">支付方式：<text class="tip">微信支付</text></view>
 					<view class="pay-money">支付金额：<text class="tip">¥ {{ orderInfo.actualPrice }}</text></view>
 				</view>
 				<view class="operation-but">
@@ -62,7 +62,7 @@ import mixinsShop from '@/common/mixins/shop.js';
 					title: '支付失败'
 				})
 			}
-			this.orderInfo = JSON.parse(uni.getStorageSync('orderInfo'))
+			this.orderInfo = options
 			console.log(this.orderInfo)
 			this.$forceUpdate()
 		},

@@ -166,6 +166,12 @@
                 this.$http.get(commodity.getCity).then(res => {
                     uni.hideLoading()
                     if (res.code == 200) {
+                        // 将全国给隐藏掉
+                        res.data.forEach((el,index,data)=>{
+                            if(el.code == 'COMPANY_ALL'){
+                                data.splice(index, 1)
+                            }
+                        })
                         this.lists = this.getBrands(res.data)
                     } else{
                         uni.showToast({

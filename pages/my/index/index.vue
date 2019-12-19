@@ -170,7 +170,7 @@
                 this.isQrCode = true;
                 this.avatarUrl = userInfo.avatarUrl ? userInfo.avatarUrl : hest;
                 this.nickName = userInfo.nickName ? userInfo.nickName : '顶呱呱用户';
-                this.getAccount()
+                // this.getAccount()
             } else {
                 this.avatarUrl = hest;
                 this.nickName = '未登录';

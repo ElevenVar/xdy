@@ -5,7 +5,8 @@
 			<view class="tui-product-box tui-padding">
 				<image :src="item ? item.commoditySku.skuImgs : product.skuImgs" class="tui-popup-img"></image>
 				<view class="tui-popup-price">
-					<view class="tui-amount tui-bold">￥{{ item ? item.commoditySku.skuSellingPrice : product.skuSellingPrice | price }}</view>
+					<view class="tui-amount tui-bold" v-if="skuIsDiscuss==0">￥{{ item ? item.commoditySku.skuSellingPrice : product.skuSellingPrice | price }}</view>
+					<view class="tui-amount tui-bold" v-else>面议</view>
 					<view class="tui-number">编号:{{item ? item.commodity.comCode : product.comCode }}</view>
 				</view>
 			</view>
@@ -34,7 +35,9 @@
 				<load-more v-else></load-more>
 			</scroll-view>
 			<view class="tui-operation tui-operation-right tui-right-flex tui-popup-btn tui-btn-class-yes ">
-				<block><button type="red" class="tui-btn-class tui-flex-1" @click="handleSubmit(handleType)">确定</button></block>
+				<block><button type="red" class="tui-btn-class tui-flex-1" v-if="skuIsDiscuss==0"  @click="handleSubmit(handleType)">确定</button>
+				<button class="tui-btn-class tui-flex-1" type="primary" open-type='contact' v-else>立即咨询</button>
+				</block>
 			</view>
 			<view class="tui-icon tui-icon-close-fill tui-icon-close" style="color: #999;font-size:24px" @tap="hidePopup"></view>
 		</view>
@@ -59,7 +62,8 @@ export default {
 		return {
 			skuId: '',
 			num: '',
-			item: false
+			item: false,
+			skuIsDiscuss: 0
 		};
 	},
 	props: {
@@ -125,6 +129,7 @@ export default {
 					this.item.commodityPropertyBySkuList = res.data.commodityPropertyBySkuList;
 					this.item.commoditySku = res.data.commoditySku;
 					this.skuId = res.data.commoditySku.skuId;
+					this.skuIsDiscuss = res.data.commoditySku.skuId;
 				} else {
 					uni.showToast({
 						icon: 'none',
